@@ -1,31 +1,25 @@
-import {Component, Fragment} from "react";
-import Counter from "./counter-product/counter_product";
+import { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { Col } from "reactstrap";
 
 
-
-export default class Product extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            order: 4
-        }
-    }
-    
-
-    handleCounterChange = (newValue) => {
-        this.setState({
-            order:newValue
-        })
-    }
-
+class Product extends Component {
     render() {
+        const { order, dispatch } = this.props
         return (
-            <Fragment>
-                <div>
-                    <p>{this.state.order}</p>
-                </div>
-                <Counter onCounterChange={(value) => this.handleCounterChange(value)}/>
-            </Fragment>
+            <>
+                <Col sm="1">
+                    <p>cart</p>
+                </Col><Col sm="1">
+                    <div>{order}</div>
+                </Col>
+            </>
         )
     }
 }
+
+function mapStateToProps(state) {
+    return { ...state }
+}
+
+export default connect(mapStateToProps)(Product);
